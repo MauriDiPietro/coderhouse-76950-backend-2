@@ -3,7 +3,6 @@ import { userRepository } from "../repositories/user-repository.js";
 import CustomError from "../utils/custom-error.js";
 import { createHash, isValidPass } from "../utils/user-utils.js";
 import config from "../config/config.js";
-import { userRepository } from "../repositories/user-repository.js";
 
 class UserServices {
   constructor(repository) {
@@ -15,9 +14,12 @@ class UserServices {
       const { email, password } = body;
       const existUser = await this.repository.getUserByEmail(email);
       if (existUser) throw new CustomError("El usuario ya existe", 400);
+      //crear el cart
+      // const cart = await cartServices.createCart();
       const response = await this.repository.create({
         ...body,
         password: createHash(password),
+        // cart: cart._id
       });
       if (!response)
         throw new CustomError("Error al registrar al usuario", 400);

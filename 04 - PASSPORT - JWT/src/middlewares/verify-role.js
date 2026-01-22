@@ -4,7 +4,7 @@ export const verifyRole = (role) => {
     if (req.user.role && req.user.role.toUpperCase() !== role)
       return res
         .status(403)
-        .json({ message: "Not tenes permisos para acceder a este recurso" });
+        .json({ error: "No tenes permisos para acceder a este recurso" });
     next();
   };
 };

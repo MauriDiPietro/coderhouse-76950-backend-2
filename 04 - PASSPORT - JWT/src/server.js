@@ -5,8 +5,8 @@ import config from "./config/config.js";
 import { errorHandler } from "./middlewares/error-handler.js";
 import userRouter from "./routes/user-router.js";
 import { initMongoDB } from "./config/db-connection.js";
-import './middlewares/passport/passport-jwt-cookies.js'
 import './middlewares/passport/passport-jwt-headers.js'
+import './middlewares/passport/passport-jwt-cookies.js'
 
 const app = express();
 

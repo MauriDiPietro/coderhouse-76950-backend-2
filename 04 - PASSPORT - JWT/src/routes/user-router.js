@@ -8,34 +8,25 @@ const router = Router();
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 /* ------------------------------------ - ----------------------------------- */
-router.get(
-  "/private-headers",
-  passportCall("jwt", { session: false }),
-  verifyRole('USER'),
-  (req, res) => res.json({ user: req.user })
+router.get("/current-headers", passportCall("jwt"), (req, res) =>
+  res.json({ user: req.user }),
 );
-
 router.get(
-  "/private-headers-admin",
-  passportCall("jwt", { session: false }),
-  verifyRole('ADMIN'),
-  (req, res) => res.json({ user: req.user })
+  "/current-headers-admin",
+  passportCall("jwt"),
+  verifyRole("ADMIN"),
+  (req, res) => res.json({ user: req.user }),
 );
-
 /* ------------------------------------ - ----------------------------------- */
-
+router.get("/current-cookies", passportCall("current"), (req, res) =>
+  res.json({ user: req.user }),
+);
 router.get(
-  "/private-cookies",
-  passportCall("jwtCookies", { session: false }),
-  verifyRole('USER'),
-  (req, res) => res.json({ user: req.user })
+  "/current-cookies-admin",
+  passportCall("current"),
+  verifyRole("ADMIN"),
+  (req, res) => res.json({ user: req.user }),
 );
 
-router.get(
-  "/private-cookies-admin",
-  passportCall("jwtCookies", { session: false }),
-  verifyRole('ADMIN'),
-  (req, res) => res.json({ user: req.user })
-);
 
 export default router;

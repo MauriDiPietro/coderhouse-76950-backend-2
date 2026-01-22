@@ -1,6 +1,6 @@
 import passport from "passport";
 
-export const passportCall = (strategy, options = {}) => {
+export const passportCall = (strategy, options = { session: false }) => {
   return async (req, res, next) => {
     passport.authenticate(strategy, options, (err, user, info) => {
       if (err) return next(err);
