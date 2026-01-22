@@ -1,13 +1,13 @@
-import { userRepository } from "../repositories/user-repository.js";
+import { userServices } from "../services/user-services.js";
 
 class UserController {
-  constructor(repository) {
-    this.repository = repository;
+  constructor(services) {
+    this.services = services;
   }
 
   register = async (req, res, next) => {
     try {
-      const response = await this.repository.register(req.body);
+      const response = await this.services.register(req.body);
       res.json(response);
     } catch (error) {
       next(error);
@@ -17,8 +17,8 @@ class UserController {
   login = async (req, res, next) => {
     try {
       const { email, password } = req.body;
-      const user = await this.repository.login(email, password);
-      const token = this.repository.generateToken(user);
+      const user = await this.services.login(email, password);
+      const token = this.services.generateToken(user);
       // res.header("Authorization", token).json({ token });
       res.cookie('accessToken', token, { httpOnly: true }).json({ token });
     } catch (error) {
@@ -27,4 +27,4 @@ class UserController {
   };
 }
 
-export const userController = new UserController(userRepository);
+export const userController = new UserController(userServices);

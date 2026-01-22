@@ -1,4 +1,4 @@
-export default class MongoDao {
+export default class MongoRepository {
   constructor(model) {
     this.model = model;
   }
