@@ -54,6 +54,7 @@ class UserServices {
     );
     return token;
   }
+
 }
 
 export const userServices = new UserServices(userRepository);
